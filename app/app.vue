@@ -3,8 +3,10 @@
 
 <template>
   <UApp>
-    <UMain>
-      <NuxtPage />
-    </UMain>
+    <NuxtLayout>
+      <UMain>
+        <NuxtPage/>
+      </UMain>
+    </NuxtLayout>
   </UApp>
 </template>

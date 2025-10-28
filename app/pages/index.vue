@@ -67,6 +67,7 @@
   </div>
 </template>
 <script setup lang="ts">
+
 const useApp = useNuxtApp();
 const tester = {
   request: "ping"
