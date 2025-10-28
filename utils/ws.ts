@@ -45,3 +45,5 @@ export class wsHandlerLoader {
     }
   }
 }
+
+export const wsHandler = new wsHandlerLoader(path.resolve('server/ws'))
