@@ -1,60 +1,26 @@
-# Nuxt Starter Template
+# NGINX Config Manager
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+The Goal of this project is to provide a nice web interface for editing NGINX config files.
+With the ability to easily test configs, configure SSL and provide a interface along side the config file for easy GUI config.
+The Layout of the Web App is inspired by dockge and uptime kuma.
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+## TODO / Road Map / Planned Features
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-  </picture>
-</a>
+- [ ] Websocket Communication
+- [ ] Authentication | Single User for Now
+- [ ] Add 2fa with TOTP
+- [ ] Multi User Support / Managment
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+- [ ] NGINX Config Editing / Saving / Auto Test and reload
+- [ ] Read nginx log files
+- [ ] Basic GUI for Reverse Proxy
 
-## Quick Start
+- [ ] Certbot intergration backend
+- [ ] Viewing of Certs on Frontend and Actions on them such as renew delete and so on
+- [ ] New SSL Cert Creation and configuration through GUI
+- [ ] DNS/Certbot Plugin Support
 
-```bash [Terminal]
-npm create nuxt@latest -- -t github:nuxt-ui-templates/starter
-```
+- [ ] Docker Image
+- [ ] Terminal through browser into Docker/Host | Default False
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-pnpm dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-pnpm build
-```
-
-Locally preview production build:
-
-```bash
-pnpm preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
