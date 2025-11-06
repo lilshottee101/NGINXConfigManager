@@ -1,0 +1,15 @@
+{
+  "title": "NGINX Proxy Manager",
+  "wsErrorBanner": "Websocket Dissconnected Attempting to Reconnect",
+  "active": "Active",
+  "inactive": "Inactive",
+  "tabOverview": "Overview",
+  "tabSsl": "SSL",
+  "tabLocations": "Locations",
+  "tabReverseProxy": "Reverse Proxy",
+  "tabLogging": "Logging",
+  "tabPerformance": "Performance",
+  "tabAccessControl": "Access Control",
+  "tabTemplates": "Templates",
+  "settings": "Settings"
+}
