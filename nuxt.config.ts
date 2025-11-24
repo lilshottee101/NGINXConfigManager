@@ -5,9 +5,10 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@vueuse/nuxt',
     '@nuxtjs/i18n',
-    'nuxt-monaco-editor'
+    'nuxt-monaco-editor',
+    '@pinia/nuxt'
   ],
-
+  ssr: false,
   nitro: {
     experimental: {
       websocket: true

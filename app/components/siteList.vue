@@ -8,7 +8,7 @@
       v-for="x in 5"
       text="Test"
       link="/site/test34"
-      status=true
+      status=True
     />
 
     <template #footer>

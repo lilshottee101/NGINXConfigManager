@@ -13,6 +13,7 @@ export default async (peer: any, message: any) => {
     formattedSites.push({
       site: item,
       active: enabledSites.includes(item),
+      content: "Test Site",
     });
   })
 
