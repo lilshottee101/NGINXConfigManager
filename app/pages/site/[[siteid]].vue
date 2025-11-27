@@ -17,7 +17,7 @@
         <UCard variant="soft" class="overflow-auto">
           <UTabs variant="link" :items="tabItems" class="[&>div.flex]:flex-wrap [&>div.flex]:gap-y-2 [&>div.flex>button]:whitespace-normal">
             <template #overview>
-              <h1>Insert PlaceHolder Here. (This is funny)</h1>
+              <UInput v-model="codeObject.server.?listen"/>
             </template>
             <template #ssl>
               <h2>Test SSL</h2>
@@ -38,7 +38,7 @@
               <h1>Insert PlaceHolder Here. (This is funny)</h1>
             </template>
             <template #templates>
-              <h1>Insert PlaceHolder Here. (This is funny)</h1>
+              <h1>{{ codeObject }}</h1>
             </template>
           </UTabs>
         </UCard>
@@ -48,6 +48,9 @@
 
 </template>
 <script setup lang="ts">
+import ConfigParser from '@webantic/nginx-config-parser';
+const parser = new ConfigParser()
+
 const tabItems = [
   {
     label: $t('tabOverview'),
@@ -103,14 +106,55 @@ const code = ref(`
     }
   }
   `)
-function test() {
-  code.value.append("test")
-}
+const codeObject = ref({})
+
+let isSyncing = false
 
 const editorOptions = {
   fontSize: 14,
   minimap: { enabled: false },
   automaticLayout: true,
-  readOnly: true
+  readOnly: false
 };
+
+function updateJSONFromCode(newCode: string) {
+  try {
+    const parsed = parser.toJSON(newCode)
+    codeObject.value = parsed
+  } catch (err) {
+    console.error('Parse error:', err)
+  }
+}
+
+function updateCodeFromJSON(newObj: any) {
+  try {
+    const text = parser.toConf(newObj)
+    code.value = text
+  } catch (err) {
+    console.error('Build error:', err)
+  }
+}
+const serverListen = computed({
+  get() {
+    return codeObject.value.server?.listen
+  },
+  set(value) {
+
+  }
+})
+watch([code, codeObject], ([newCode, newObj], [oldCode, oldObj]) => {
+  if (isSyncing) return
+  isSyncing = true
+
+  if (newCode !== oldCode) {
+    updateJSONFromCode(newCode)
+  } else if (newObj !== oldObj) {
+    updateCodeFromJSON(newObj)
+  }
+
+  isSyncing = false
+}, { deep: true });
+onMounted(() => {
+  updateJSONFromCode(code)
+})
 </script>

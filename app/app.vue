@@ -10,7 +10,7 @@ function getSites() {
   const request = {
     request: "getSites"
   }
-  useApp.$webSocket.send(JSON.stringify(request));
+  const sites = useApp.$webSocket.send(JSON.stringify(request));
 }
 </script>
 
