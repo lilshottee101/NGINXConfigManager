@@ -3,7 +3,7 @@
     <UPageBody class="flex flex-col h-full">
       <!-- Top Section -->
       <div class="mb-6">
-        <h2>Test Title</h2>
+        <h2>{{ activeSite.name }}</h2>
         <p>Smaller Text</p>
       </div>
 
@@ -51,19 +51,19 @@
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.serverAutoindex')">
-                  <UToggle v-model="serverAutoindex" />
+                  <USwitch label="" v-model="serverAutoindex" />
                 </UTooltip>
               </div>
             </template>
             <template #ssl>
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.sslEnabled')">
-                  <UToggle v-model="sslEnabled" />
+                  <USwitch label="" v-model="sslEnabled" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.sslCertificate')">
                   <UInput v-model="sslCertificate" placeholder="" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.sslCertificate') }}</span>
                     </label>
                   </UInput>
@@ -71,7 +71,7 @@
 
                 <UTooltip :text="$t('tooltip.sslCertificateKey')">
                   <UInput v-model="sslCertificateKey" placeholder="" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.sslCertificateKey') }}</span>
                     </label>
                   </UInput>
@@ -79,14 +79,14 @@
 
                 <UTooltip :text="$t('tooltip.sslProtocols')">
                   <UInput v-model="sslProtocols" placeholder="TLSv1.2 TLSv1.3" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.sslProtocols') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.sslHSTS')">
-                  <UToggle v-model="sslHSTS" />
+                  <USwitch label="" v-model="sslHSTS" />
                 </UTooltip>
               </div>
             </template>
@@ -94,7 +94,7 @@
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.locationPath')">
                   <UInput v-model="locationPath" placeholder="/example" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.locationPath') }}</span>
                     </label>
                   </UInput>
@@ -102,7 +102,7 @@
 
                 <UTooltip :text="$t('tooltip.locationRoot')">
                   <UInput v-model="locationRoot" placeholder="" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.locationRoot') }}</span>
                     </label>
                   </UInput>
@@ -110,7 +110,7 @@
 
                 <UTooltip :text="$t('tooltip.locationProxyPass')">
                   <UInput v-model="locationProxyPass" placeholder="http://127.0.0.1:3000" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.locationProxyPass') }}</span>
                     </label>
                   </UInput>
@@ -118,14 +118,14 @@
 
                 <UTooltip :text="$t('tooltip.locationTryFiles')">
                   <UInput v-model="locationTryFiles" placeholder="$uri $uri/ /index.html" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.locationTryFiles') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.locationEnableCaching')">
-                  <UToggle v-model="locationEnableCaching" />
+                  <USwitch label="" v-model="locationEnableCaching" />
                 </UTooltip>
               </div>
             </template>
@@ -133,27 +133,27 @@
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.proxyPass')">
                   <UInput v-model="proxyPass" placeholder="http://127.0.0.1:3000" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.proxyPass') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.proxyForwardHost')">
-                  <UToggle v-model="proxyForwardHost" />
+                  <USwitch label="" v-model="proxyForwardHost" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.proxyPassRealIP')">
-                  <UToggle v-model="proxyPassRealIP" />
+                  <USwitch label="" v-model="proxyPassRealIP" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.proxyWebsockets')">
-                  <UToggle v-model="proxyWebsockets" />
+                  <USwitch label="" v-model="proxyWebsockets" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.proxyTimeout')">
                   <UInput v-model="proxyTimeout" placeholder="60s" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.proxyTimeout') }}</span>
                     </label>
                   </UInput>
@@ -164,7 +164,7 @@
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.accessLog')">
                   <UInput v-model="accessLog" placeholder="/var/log/nginx/access.log" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.accessLog') }}</span>
                     </label>
                   </UInput>
@@ -172,7 +172,7 @@
 
                 <UTooltip :text="$t('tooltip.accessLogFormat')">
                   <UInput v-model="accessLogFormat" placeholder="combined" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.accessLogFormat') }}</span>
                     </label>
                   </UInput>
@@ -180,7 +180,7 @@
 
                 <UTooltip :text="$t('tooltip.errorLog')">
                   <UInput v-model="errorLog" placeholder="/var/log/nginx/error.log" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.errorLog') }}</span>
                     </label>
                   </UInput>
@@ -188,26 +188,26 @@
 
                 <UTooltip :text="$t('tooltip.errorLogLevel')">
                   <UInput v-model="errorLogLevel" placeholder="warn" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.errorLogLevel') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.disableAccessLog')">
-                  <UToggle v-model="disableAccessLog" />
+                  <USwitch label="" v-model="disableAccessLog" />
                 </UTooltip>
               </div>
             </template>
             <template #performance>
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.gzip')">
-                  <UToggle v-model="gzip" />
+                  <USwitch label="" v-model="gzip" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.gzipMinLength')">
                   <UInput v-model="gzipMinLength" placeholder="1000" type="number" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.gzipMinLength') }}</span>
                     </label>
                   </UInput>
@@ -215,7 +215,7 @@
 
                 <UTooltip :text="$t('tooltip.clientMaxBodySize')">
                   <UInput v-model="clientMaxBodySize" placeholder="1m" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.clientMaxBodySize') }}</span>
                     </label>
                   </UInput>
@@ -223,14 +223,14 @@
 
                 <UTooltip :text="$t('tooltip.keepaliveTimeout')">
                   <UInput v-model="keepaliveTimeout" placeholder="65s" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.keepaliveTimeout') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.sendfile')">
-                  <UToggle v-model="sendfile" />
+                  <USwitch label="" v-model="sendfile" />
                 </UTooltip>
               </div>
             </template>
@@ -238,7 +238,7 @@
               <div class="space-y-4">
                 <UTooltip :text="$t('tooltip.allowIP')">
                   <UInput v-model="allowIP" placeholder="1.2.3.4" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.allowIP') }}</span>
                     </label>
                   </UInput>
@@ -246,19 +246,19 @@
 
                 <UTooltip :text="$t('tooltip.denyIP')">
                   <UInput v-model="denyIP" placeholder="all" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.denyIP') }}</span>
                     </label>
                   </UInput>
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.basicAuth')">
-                  <UToggle v-model="basicAuth" />
+                  <USwitch label="" v-model="basicAuth" />
                 </UTooltip>
 
                 <UTooltip :text="$t('tooltip.limitReq')">
                   <UInput v-model="limitReq" placeholder="10r/s" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.limitReq') }}</span>
                     </label>
                   </UInput>
@@ -266,7 +266,7 @@
 
                 <UTooltip :text="$t('tooltip.limitConn')">
                   <UInput v-model="limitConn" placeholder="10" :ui="{ base: 'peer' }">
-                    <label>
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
                       <span>{{ $t('label.limitConn') }}</span>
                     </label>
                   </UInput>
@@ -285,7 +285,13 @@
 </template>
 <script setup lang="ts">
 import ConfigParser from '@webantic/nginx-config-parser';
+import { useSitesStore } from '~/stores/sitesStore'
+
+const siteStore = useSitesStore()
+
 const parser = new ConfigParser()
+
+const activeSite = siteStore.activeSite
 
 const tabItems = [
   {
@@ -332,16 +338,7 @@ const tabItems = [
 ]
 
 // MonacoEditor Variables and Config
-const code = ref(`
-  server {
-    listen 80;
-    server_name example.com;
-
-    location / {
-      proxy_pass http://localhost:3000;
-    }
-  }
-  `)
+const code = activeSite.contents
 const codeObject = ref({})
 
 function createComputedProp(path) {
