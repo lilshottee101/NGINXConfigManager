@@ -18,16 +18,16 @@
 import type { TabsItem } from '@nuxt/ui'
 import * as locales from '@nuxt/ui/locale'
 
-const { locale, setLocale } = useI18n()
+const { locale, setLocale, t } = useI18n()
 
-const settingsTabs = [
+const settingTabs = [
   {
-    label: $t('settingTabApperance'),
+    label: t('settingTabApperance'),
     icon: '',
     slot: 'apperance' as const
   },
   {
-    label: $t('settingTabAbout'),
+    label: t('settingTabAbout'),
     icon: '',
     slot: 'about' as const
   }

@@ -1,8 +1,10 @@
 <template>
   <NuxtLink :to="props.link">
     <UCard>
-      <UBadge>{{ props.status ? $t('active') : $t('inactive') }}</UBadge>
-      <p>{{ props.text }}</p>
+      <div class="inline-flex gap-2">
+        <UBadge>{{ props.status ? $t('active') : $t('inactive') }}</UBadge>
+        <p>{{ props.text }}</p>
+      </div>
     </UCard>
   </NuxtLink>
 </template>

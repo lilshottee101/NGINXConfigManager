@@ -3,6 +3,8 @@
   "wsErrorBanner": "Websocket Dissconnected Attempting to Reconnect",
   "active": "Active",
   "inactive": "Inactive",
+  "enabled": "enabled",
+  "disabled": "disabled",
   "tabOverview": "Overview",
   "tabSsl": "SSL",
   "tabLocations": "Locations",
@@ -12,6 +14,45 @@
   "tabAccessControl": "Access Control",
   "tabTemplates": "Templates",
   "settings": "Settings",
+  "settingTabApperance": "Appearance",
+  "settingTabAbout": "About",
+  "colorModeLabel": "Color Mode",
+  "languageSelectLabel": "Language",
+  "button": {
+    "enable": "Enable",
+    "disable": "Disable",
+    "saveChanges": "Save Changes",
+    "discardChanges": "Discard Changes",
+    "testConfig": "Test Config",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "overrideAndSave": "Override and Save Anyway"
+  },
+  "badge": {
+    "unsavedChanges": "Unsaved Changes"
+  },
+  "modal": {
+    "configTestFailed": "Configuration Test Failed",
+    "configValid": "Configuration Valid",
+    "configValidDescription": "Your NGINX configuration syntax is correct"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "changesDiscarded": "Changes Discarded",
+    "failedToSave": "Failed to save configuration",
+    "siteStatusChanged": "Site {status} successfully",
+    "failedToToggleStatus": "Failed to toggle site status",
+    "failedToTest": "Failed to test configuration",
+    "changesReverted": "Your changes have been reverted",
+    "failedToDelete": "Failed to delete site"
+  },
+  "confirm": {
+    "discardChanges": "Are you sure you want to discard all changes?",
+    "deleteSite": "Are you sure you want to delete {name}? This action cannot be undone.",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to switch sites? Your changes will be lost."
+  },
   "label": {
     "allowIP": "Allow IP",
     "denyIP": "Deny IP",

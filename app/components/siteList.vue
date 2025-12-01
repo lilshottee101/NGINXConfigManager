@@ -4,7 +4,7 @@
       <UInput v-model="searchQuery" icon="i-lucide-search" size="md" variant="outline" placeholder="Search sites..." />
     </template>
 
-    <site v-for="site in paginatedSites" :key="site.id" :text="site.name" :link="`/site/${site.name}`"
+    <site v-for="site in paginatedSites" :key="site.id" :text="site.name" link="/site"
       :status="site.enabled" @click="handleSiteClick(site)" />
 
     <div v-if="paginatedSites.length === 0" class="text-center py-8 text-gray-500">

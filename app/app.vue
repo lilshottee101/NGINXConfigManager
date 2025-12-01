@@ -1,17 +1,22 @@
 <script setup>
-onMounted(() => {
-  console.log("test")
-  getSites()
+import { useSitesStore } from '~/stores/sitesStore'
+
+const sitesStore = useSitesStore()
+const nginxApi = useNginxApi()
+
+onMounted(async () => {
+  console.log("Fetching initial sites...")
+  await fetchSites()
 })
 
-const useApp = useNuxtApp();
-function getSites() {
-
-  const request = {
-    request: "getSites"
+async function fetchSites() {
+  try {
+    const sites = await nginxApi.getSites()
+    sitesStore.setSites(sites)
+    console.log('Initial sites loaded:', sites)
+  } catch (err) {
+    console.error('Failed to fetch sites:', err)
   }
-  const sites = useApp.$webSocket.send(JSON.stringify(request));
-  console.log(sites)
 }
 </script>
 
