@@ -1,66 +1,80 @@
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
-      <h3 class="text-xl font-semibold">SSL/TLS Certificates</h3>
-      <div class="flex gap-2">
+    <div class="space-y-4">
+      <div>
+        <h3 class="text-2xl font-bold">SSL/TLS Certificates</h3>
+        <p class="text-muted text-sm mt-1">Manage Let's Encrypt and custom SSL certificates</p>
+      </div>
+      <div class="flex gap-2 flex-wrap">
         <UButton label="Create Certificate" icon="i-lucide-plus" color="primary" @click="showCreateModal" />
-        <UButton label="Upload Custom" icon="i-lucide-upload" color="secondary" @click="showUploadModal" />
+        <UButton label="Upload Custom" icon="i-lucide-upload" variant="outline" @click="showUploadModal" />
         <UButton label="Refresh" icon="i-lucide-refresh-cw" variant="outline" :loading="isLoading"
           @click="loadCertificates" />
       </div>
     </div>
 
-    <div v-if="isLoading && certificates.length === 0" class="text-center py-8">
+    <div v-if="isLoading && certificates.length === 0" class="text-center py-16">
       <USpinner size="lg" />
-      <p class="mt-2 text-gray-500">Loading certificates...</p>
+      <p class="mt-4 text-muted font-medium">Loading certificates...</p>
     </div>
 
-    <div v-else-if="certificates.length === 0" class="text-center py-8">
-      <p class="text-gray-500">No certificates found</p>
+    <div v-else-if="certificates.length === 0" class="text-center py-16">
+      <UIcon name="i-lucide-shield-off" class="w-16 h-16 mx-auto mb-4 text-muted opacity-50" />
+      <h4 class="font-semibold text-lg mb-2">No Certificates Found</h4>
+      <p class="text-muted mb-6">Get started by creating a Let's Encrypt certificate or uploading a custom one</p>
+      <div class="flex gap-2 justify-center">
+        <UButton label="Create Certificate" icon="i-lucide-plus" color="primary" @click="showCreateModal" />
+        <UButton label="Upload Custom" icon="i-lucide-upload" variant="outline" @click="showUploadModal" />
+      </div>
     </div>
 
-    <div v-else class="space-y-4">
-      <UCard v-for="cert in certificates" :key="cert.name" variant="soft">
-        <div class="flex items-start justify-between">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-2">
-              <h4 class="font-semibold text-lg">{{ cert.name }}</h4>
-              <UBadge :color="cert.valid ? 'green' : 'red'">
+    <div v-else class="space-y-3">
+      <UCard v-for="cert in certificates" :key="cert.name" variant="soft" class="hover:ring-1 hover:ring-primary/50 transition-all">
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex-1 space-y-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              <h4 class="font-bold text-lg">{{ cert.name }}</h4>
+              <UBadge :color="cert.valid ? 'green' : 'red'" variant="soft" size="md">
+                <UIcon :name="cert.valid ? 'i-lucide-check-circle' : 'i-lucide-alert-circle'" class="w-4 h-4 mr-1" />
                 {{ cert.valid ? 'Valid' : 'Expired' }}
               </UBadge>
-              <UBadge v-if="cert.daysUntilExpiry !== undefined" color="gray">
+              <UBadge v-if="cert.daysUntilExpiry !== undefined" :color="cert.daysUntilExpiry < 30 ? 'orange' : 'gray'" variant="soft">
+                <UIcon name="i-lucide-clock" class="w-4 h-4 mr-1" />
                 {{ cert.daysUntilExpiry }} days left
               </UBadge>
             </div>
 
-            <div class="space-y-1 text-sm text-gray-600">
-              <div class="flex items-center gap-2">
-                <span class="font-medium">Domains:</span>
-                <div class="flex flex-wrap gap-1">
-                  <UBadge v-for="domain in cert.domains" :key="domain" variant="soft" size="xs">
+            <div class="space-y-2 text-sm">
+              <div class="flex items-start gap-2">
+                <UIcon name="i-lucide-globe" class="w-4 h-4 mt-0.5 flex-shrink-0 text-muted" />
+                <div class="flex flex-wrap gap-1.5">
+                  <UBadge v-for="domain in cert.domains" :key="domain" variant="soft" size="sm" color="neutral">
                     {{ domain }}
                   </UBadge>
                 </div>
               </div>
-              <div>
-                <span class="font-medium">Expires:</span> {{ cert.expiry }}
+              <div class="flex items-center gap-2 text-muted">
+                <UIcon name="i-lucide-calendar" class="w-4 h-4 flex-shrink-0" />
+                <span>Expires: <span class="font-medium">{{ cert.expiry }}</span></span>
               </div>
-              <div class="text-xs font-mono">
-                <div><span class="font-medium">Cert:</span> {{ cert.certPath }}</div>
-                <div><span class="font-medium">Key:</span> {{ cert.keyPath }}</div>
+              <div class="text-xs font-mono space-y-1 text-muted bg-muted/20 p-2 rounded">
+                <div class="flex items-center gap-1.5">
+                  <UIcon name="i-lucide-file-key" class="w-3 h-3 flex-shrink-0" />
+                  <span class="truncate">{{ cert.certPath }}</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <UIcon name="i-lucide-key" class="w-3 h-3 flex-shrink-0" />
+                  <span class="truncate">{{ cert.keyPath }}</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="flex gap-2 ml-4">
-            <UButton icon="i-lucide-refresh-cw" color="primary" variant="soft" size="sm"
-              :loading="renewingCerts.has(cert.name)" @click="handleRenew(cert.name)">
-              Renew
-            </UButton>
-            <UButton icon="i-lucide-trash" color="red" variant="soft" size="sm" :loading="deletingCerts.has(cert.name)"
-              @click="handleDelete(cert.name)">
-              Delete
-            </UButton>
+          <div class="flex flex-col gap-2 flex-shrink-0">
+            <UButton icon="i-lucide-refresh-cw" label="Renew" color="primary" variant="soft" size="sm"
+              :loading="renewingCerts.has(cert.name)" @click="handleRenew(cert.name)" />
+            <UButton icon="i-lucide-trash-2" label="Delete" color="red" variant="soft" size="sm"
+              :loading="deletingCerts.has(cert.name)" @click="handleDelete(cert.name)" />
           </div>
         </div>
       </UCard>

@@ -2,7 +2,10 @@
   <UBanner v-if="wsOpen" color="error" icon="i-lucide-info" :title="$t('wsErrorBanner')" />
   <UHeader>
     <template #title>
-      <a>{{ $t('title') }}</a>
+      <NuxtLink to="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <UIcon name="i-lucide-server" class="w-8 h-8 text-primary" />
+        <span class="font-bold text-xl">{{ $t('title') }}</span>
+      </NuxtLink>
     </template>
     <template #right>
       <UDropdownMenu

@@ -1,20 +1,36 @@
 <template>
-  <h2>{{ $t('settings') }}</h2>
-  <UCard variant="soft">
-    <UTabs :items="settingTabs" orientation="vertical">
-      <template #apperance>
+  <UPage>
+    <UPageBody>
+      <div class="space-y-6">
         <div>
-          <p>{{ $t('colorModeLabel') }}</p>
-          <UColorModeSelect />
-          <p>{{ $t('languageSelectLabel') }}</p>
-          <ULocaleSelect v-model="locale" :locales="Object.values(locales)" @update:model-value="setLocale($event)" />
+          <h1 class="text-3xl font-bold">{{ $t('settings') }}</h1>
+          <p class="text-muted mt-1">Manage your application settings and preferences</p>
         </div>
-      </template>
-      <template #certificates>
-        <CertificateManager />
-      </template>
-    </Utabs>
-  </UCard>
+
+        <UCard variant="soft">
+          <UTabs :items="settingTabs" orientation="vertical">
+            <template #apperance>
+              <div class="space-y-6 p-6">
+                <div class="space-y-3">
+                  <label class="text-sm font-semibold">{{ $t('colorModeLabel') }}</label>
+                  <UColorModeSelect />
+                </div>
+                <div class="space-y-3">
+                  <label class="text-sm font-semibold">{{ $t('languageSelectLabel') }}</label>
+                  <ULocaleSelect v-model="locale" :locales="Object.values(locales)" @update:model-value="setLocale($event)" />
+                </div>
+              </div>
+            </template>
+            <template #certificates>
+              <div class="p-6">
+                <CertificateManager />
+              </div>
+            </template>
+          </UTabs>
+        </UCard>
+      </div>
+    </UPageBody>
+  </UPage>
 </template>
 
 <script setup lang="ts">

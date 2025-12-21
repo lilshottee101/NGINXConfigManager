@@ -1,20 +1,25 @@
 <template>
   <UPage>
     <UPageBody class="flex flex-col h-full">
-      <div class="mb-6">
+      <div class="mb-6 space-y-4">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <UBadge>{{  activeSite?.enabled ? $t('active') : $t('inactive') }}</UBadge>
-            <h2>{{ activeSite?.name }}</h2>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3">
+              <h1 class="text-3xl font-bold">{{ activeSite?.name }}</h1>
+              <UBadge :color="activeSite?.enabled ? 'green' : 'gray'" variant="soft" size="lg">
+                {{ activeSite?.enabled ? $t('active') : $t('inactive') }}
+              </UBadge>
+              <UBadge v-if="hasUnsavedChanges" color="orange" variant="soft" size="lg">
+                {{ $t('badge.unsavedChanges') }}
+              </UBadge>
+            </div>
+            <p class="text-muted">Configure and manage your site</p>
           </div>
-
-          <UBadge v-if="hasUnsavedChanges" color="orange" variant="soft">{{ $t('badge.unsavedChanges') }}</UBadge>
         </div>
-        <div class="inline-flex overflow-hidden rounded-xl border border-gray-300">
+        <div class="flex gap-2">
             <UButton
               :label="$t('button.enable')"
-              variant="solid"
-              class="rounded-none"
+              icon="i-lucide-power"
               color="success"
               v-if="!activeSite?.enabled"
               :disabled="hasUnsavedChanges || isTogglingStatus"
@@ -24,8 +29,7 @@
 
             <UButton
               :label="$t('button.disable')"
-              variant="solid"
-              class="rounded-none"
+              icon="i-lucide-power-off"
               color="error"
               v-if="activeSite?.enabled"
               :disabled="hasUnsavedChanges || isTogglingStatus"
@@ -33,31 +37,29 @@
               @click="handleToggleStatus"
             />
 
-            <div v-if="hasUnsavedChanges">
-              <UButton
-                :label="$t('button.saveChanges')"
-                variant="solid"
-                class="rounded-none border-x border-gray-300"
-                color="secondary"
-                :disabled="isSaving"
-                :loading="isSaving"
-                @click="handleSave(false)"
-              />
+            <UButton
+              v-if="hasUnsavedChanges"
+              :label="$t('button.saveChanges')"
+              icon="i-lucide-save"
+              color="primary"
+              :disabled="isSaving"
+              :loading="isSaving"
+              @click="handleSave(false)"
+            />
 
-              <UButton
-                :label="$t('button.discardChanges')"
-                variant="solid"
-                class="rounded-none"
-                color="warning"
-                @click="handleDiscardChanges"
-              />
-            </div>
+            <UButton
+              v-if="hasUnsavedChanges"
+              :label="$t('button.discardChanges')"
+              icon="i-lucide-x"
+              color="neutral"
+              variant="outline"
+              @click="handleDiscardChanges"
+            />
 
             <UButton
               :label="$t('button.testConfig')"
-              variant="solid"
-              class="rounded-none"
-              color="info"
+              icon="i-lucide-flask-conical"
+              variant="outline"
               :disabled="isTesting"
               :loading="isTesting"
               @click="handleTestConfig"
@@ -65,9 +67,9 @@
 
             <UButton
               :label="$t('button.delete')"
-              variant="solid"
-              class="rounded-none"
-              color="error"
+              icon="i-lucide-trash-2"
+              color="red"
+              variant="outline"
               @click="handleDeleteSite"
             />
           </div>
