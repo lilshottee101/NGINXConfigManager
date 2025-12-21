@@ -8,7 +8,13 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "docker:build": "docker build -t nginx-config-manager:latest .",
+    "docker:run": "docker run -d -p 3000:3000 -p 80:80 -p 443:443 --name nginx-config-manager nginx-config-manager:latest",
+    "docker:stop": "docker stop nginx-config-manager && docker rm nginx-config-manager",
+    "docker:publish": "docker tag nginx-config-manager:latest YOUR_REGISTRY/nginx-config-manager:latest && docker push YOUR_REGISTRY/nginx-config-manager:latest",
+    "docker:compose:up": "docker-compose up -d",
+    "docker:compose:down": "docker-compose down"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.70",

@@ -7,21 +7,27 @@ export default async (peer: any, message: any) => {
   const formattedSites = []
   const { requestId } = message;
 
-  const availableSites = await readdir('/etc/nginx/sites-available');
-  const enabledSites = await readdir('/etc/nginx/sites-enabled');
+  const confFiles = await readdir('/etc/nginx/conf.d');
 
-  availableSites.forEach((item) => {
+  confFiles.forEach((item) => {
+    if (!item.endsWith('.conf') && !item.endsWith('.conf.disabled')) {
+      return;
+    }
+
     const fileContents = (() => {
       try {
-        return fs.readFileSync(`/etc/nginx/sites-available/${item}`, 'utf8');
+        return fs.readFileSync(`/etc/nginx/conf.d/${item}`, 'utf8');
       } catch {
         return null;
       }
     })();
 
+    const isEnabled = item.endsWith('.conf');
+    const siteName = item.replace(/\.conf(\.disabled)?$/, '');
+
     formattedSites.push({
-      site: item,
-      active: enabledSites.includes(item),
+      site: siteName,
+      active: isEnabled,
       content: fileContents,
     });
   })

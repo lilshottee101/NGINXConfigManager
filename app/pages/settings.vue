@@ -10,6 +10,9 @@
           <ULocaleSelect v-model="locale" :locales="Object.values(locales)" @update:model-value="setLocale($event)" />
         </div>
       </template>
+      <template #certificates>
+        <CertificateManager />
+      </template>
     </Utabs>
   </UCard>
 </template>
@@ -25,6 +28,11 @@ const settingTabs = [
     label: t('settingTabApperance'),
     icon: '',
     slot: 'apperance' as const
+  },
+  {
+    label: 'Certificates',
+    icon: 'i-lucide-shield-check',
+    slot: 'certificates' as const
   },
   {
     label: t('settingTabAbout'),

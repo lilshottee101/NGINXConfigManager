@@ -1,6 +1,6 @@
 import { spawnSync, spawn, ChildProcess } from 'node:child_process';
 import fs from 'node:fs';
-import { symlink, unlink, access } from 'node:fs/promises';
+import { access } from 'node:fs/promises';
 import type { nginxSignals, nginxInfoDictionary } from "../types/nginx.d.ts";
 
 function sendSignal(signal: nginxSignals): ChildProcess {
@@ -53,35 +53,39 @@ function getInfo(): nginxInfoDictionary {
 }
 
 async function enableSite(siteName: string): Promise<void> {
-  const availablePath = `/etc/nginx/sites-available/${siteName}`;
-  const enabledPath = `/etc/nginx/sites-enabled/${siteName}`;
+  const disabledPath = `/etc/nginx/conf.d/${siteName}.conf.disabled`;
+  const enabledPath = `/etc/nginx/conf.d/${siteName}.conf`;
 
-  const exists = await access(availablePath).then(() => true).catch(() => false);
-  if (!exists) {
-    throw new Error(`Site ${siteName} does not exist in sites-available`);
+  const disabledExists = await access(disabledPath).then(() => true).catch(() => false);
+  const enabledExists = await access(enabledPath).then(() => true).catch(() => false);
+
+  if (!disabledExists && !enabledExists) {
+    throw new Error(`Site ${siteName} does not exist in conf.d`);
   }
 
-  const alreadyEnabled = await access(enabledPath).then(() => true).catch(() => false);
-  if (alreadyEnabled) {
+  if (enabledExists) {
     return;
   }
 
-  await symlink(availablePath, enabledPath);
+  const fs = await import('node:fs/promises');
+  await fs.rename(disabledPath, enabledPath);
 }
 
 async function disableSite(siteName: string): Promise<void> {
-  const enabledPath = `/etc/nginx/sites-enabled/${siteName}`;
+  const enabledPath = `/etc/nginx/conf.d/${siteName}.conf`;
+  const disabledPath = `/etc/nginx/conf.d/${siteName}.conf.disabled`;
 
   const exists = await access(enabledPath).then(() => true).catch(() => false);
   if (!exists) {
     return;
   }
 
-  await unlink(enabledPath);
+  const fs = await import('node:fs/promises');
+  await fs.rename(enabledPath, disabledPath);
 }
 
 async function isSiteEnabled(siteName: string): Promise<boolean> {
-  const enabledPath = `/etc/nginx/sites-enabled/${siteName}`;
+  const enabledPath = `/etc/nginx/conf.d/${siteName}.conf`;
   return await access(enabledPath).then(() => true).catch(() => false);
 }
 
