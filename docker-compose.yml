@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  nginx-manager:
+    image: nginx-config-manager:latest
+    container_name: nginx-config-manager
+    ports:
+      - "3000:3000"  # Nuxt app
+      - "80:80"      # nginx HTTP
+      - "443:443"    # nginx HTTPS
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    # Uncomment and customize volumes for persistence:
+    # volumes:
+    #   - ./data/conf.d:/etc/nginx/conf.d
+    #   - ./data/letsencrypt:/etc/letsencrypt
+    #   - ./data/www:/var/www/html
+    #   - ./data/logs:/var/log/nginx

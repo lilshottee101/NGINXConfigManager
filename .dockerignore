@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+# Nuxt build output
+.output
+.nuxt
+dist
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Logs
+logs
+*.log
+
+# Misc
+TODO
+*.md
+!README.md

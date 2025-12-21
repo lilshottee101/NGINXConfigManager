@@ -1,0 +1,13 @@
+services:
+  ncm:
+    image: replaceme/temp:latest
+    restart: unless-stopped
+    ports:
+      # Http/Https Ports
+      - 80:80
+      - 443:443
+      # UI Port
+      - 81:81
+    volumes:
+
+    environment:
