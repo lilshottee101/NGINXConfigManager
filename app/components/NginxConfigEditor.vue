@@ -2,7 +2,7 @@
   <UCard variant="soft" class="overflow-hidden h-full">
     <template #header>
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold">Configuration Options</h3>
+        <h3 class="text-lg font-semibold">{{ $t('configEditor.title') }}</h3>
         <UBadge color="primary" variant="soft">{{ activeTabLabel }}</UBadge>
       </div>
     </template>
@@ -83,12 +83,12 @@
             </div>
 
             <div class="space-y-1">
-              <UFormGroup label="Select Certificate" help="Choose from available certificates or enter paths manually">
+              <UFormGroup :label="$t('label.selectCertificate')" :help="$t('tooltip.selectCertificate')">
                 <div class="flex gap-2">
                   <USelect
                     v-model="selectedCertificate"
                     :options="certificateOptions"
-                    placeholder="Select a certificate..."
+                    :placeholder="$t('placeholder.selectCertificate')"
                     class="flex-1"
                     size="lg"
                     icon="i-lucide-shield-check"
@@ -102,7 +102,7 @@
                     :disabled="!selectedCertificate"
                     @click="loadCertificatePaths"
                   >
-                    Load
+                    {{ $t('button.load') }}
                   </UButton>
                 </div>
               </UFormGroup>
@@ -435,7 +435,7 @@
         <template #templates>
           <div class="p-4">
             <div class="rounded-lg bg-muted/50 p-4">
-              <h4 class="text-sm font-medium mb-2">Configuration Object</h4>
+              <h4 class="text-sm font-medium mb-2">{{ $t('configEditor.configurationObject') }}</h4>
               <pre class="text-xs overflow-auto">{{ codeObject }}</pre>
             </div>
           </div>
@@ -450,6 +450,7 @@ const props = defineProps<{
   codeObject: any
 }>()
 
+const { t } = useI18n()
 const nginxApi = useNginxApi()
 const toast = useToast()
 
@@ -492,8 +493,8 @@ function loadCertificatePaths() {
   }
 
   toast.add({
-    title: 'Certificate Loaded',
-    description: `Loaded paths for ${cert.name}. SSL enabled on port 443.`,
+    title: t('toast.certificateLoaded'),
+    description: t('toast.certificateLoadedDescription', { name: cert.name }),
     color: 'green'
   })
 }

@@ -16,10 +16,10 @@
         }"
       >
         <UUser
-          name="Default User"
-          description="Administrator"
+          :name="$t('layout.defaultUser')"
+          :description="$t('layout.administrator')"
           :avatar="{
-            alt: 'Default User'
+            alt: $t('layout.defaultUser')
           }"
         />
       </UDropdownMenu>
@@ -27,35 +27,38 @@
   </UHeader>
   <UPage>
     <template #left>
-      <UPageAside>
-        <siteList />
+      <UPageAside class="pl-4 pr-2 py-4 h-full">
+        <siteList class="h-full" />
       </UPageAside>
     </template>
-    <slot/>
+    <div class="pr-4 h-full">
+      <slot/>
+    </div>
   </UPage>
 </template>
 
 <script setup lang="ts">
   import type { DropdownMenuItem } from '@nuxt/ui';
+  const { t } = useI18n()
   const nuxtApp = useNuxtApp()
 
   const dropdownItems = ref<DropdownMenuItem[]>([
     [
       {
-        label: "Profile",
+        label: t('layout.profile'),
         icon: "i-lucide-user"
       }
     ],
     [
       {
-        label: "Settings",
+        label: t('settings'),
         icon: "i-lucide-settings",
         to: "/settings"
       }
     ],
     [
       {
-        label: "Logout",
+        label: t('layout.logout'),
         icon: "i-lucide-log-out",
         color: "error"
       }

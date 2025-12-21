@@ -1,10 +1,10 @@
 <template>
   <UPage>
-    <UPageBody>
+    <UPageBody class="py-4">
       <div class="space-y-6">
         <div>
           <h1 class="text-3xl font-bold">{{ $t('settings') }}</h1>
-          <p class="text-muted mt-1">Manage your application settings and preferences</p>
+          <p class="text-muted mt-1">{{ $t('page.settings.subtitle') }}</p>
         </div>
 
         <UCard variant="soft">
@@ -46,7 +46,7 @@ const settingTabs = [
     slot: 'apperance' as const
   },
   {
-    label: 'Certificates',
+    label: t('settingTabCertificates'),
     icon: 'i-lucide-shield-check',
     slot: 'certificates' as const
   },

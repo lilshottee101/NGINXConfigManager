@@ -15,6 +15,7 @@
   "tabTemplates": "Templates",
   "settings": "Settings",
   "settingTabApperance": "Appearance",
+  "settingTabCertificates": "Certificates",
   "settingTabAbout": "About",
   "colorModeLabel": "Color Mode",
   "languageSelectLabel": "Language",
@@ -27,15 +28,31 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "ok": "OK",
-    "overrideAndSave": "Override and Save Anyway"
+    "overrideAndSave": "Override and Save Anyway",
+    "create": "Create",
+    "upload": "Upload",
+    "refresh": "Refresh",
+    "renew": "Renew",
+    "load": "Load",
+    "uploadFile": "Upload File",
+    "addDomain": "Add Domain",
+    "createSite": "Create Site",
+    "createCertificate": "Create Certificate",
+    "uploadCustom": "Upload Custom"
   },
   "badge": {
-    "unsavedChanges": "Unsaved Changes"
+    "unsavedChanges": "Unsaved Changes",
+    "valid": "Valid",
+    "expired": "Expired",
+    "daysLeft": "{count} days left"
   },
   "modal": {
     "configTestFailed": "Configuration Test Failed",
     "configValid": "Configuration Valid",
-    "configValidDescription": "Your NGINX configuration syntax is correct"
+    "configValidDescription": "Your NGINX configuration syntax is correct",
+    "createNewSite": "Create New Site",
+    "createNewCertificate": "Create New Certificate",
+    "uploadCustomCertificate": "Upload Custom Certificate"
   },
   "toast": {
     "success": "Success",
@@ -46,12 +63,30 @@
     "failedToToggleStatus": "Failed to toggle site status",
     "failedToTest": "Failed to test configuration",
     "changesReverted": "Your changes have been reverted",
-    "failedToDelete": "Failed to delete site"
+    "failedToDelete": "Failed to delete site",
+    "sitesRefreshed": "Sites Refreshed",
+    "siteListUpdated": "Site list has been updated",
+    "failedToCreateSite": "Failed to create site",
+    "certificateCreated": "Certificate created successfully",
+    "failedToCreateCertificate": "Failed to create certificate",
+    "certificateUploaded": "Certificate uploaded successfully",
+    "failedToUploadCertificate": "Failed to upload certificate",
+    "certificateRenewed": "Certificate {name} renewed successfully",
+    "failedToRenewCertificate": "Failed to renew certificate",
+    "certificateDeleted": "Certificate {name} deleted successfully",
+    "failedToDeleteCertificate": "Failed to delete certificate",
+    "failedToLoadCertificates": "Failed to load certificates",
+    "certificateLoaded": "Certificate Loaded",
+    "certificateLoadedDescription": "Loaded paths for {name}. SSL enabled on port 443.",
+    "failedToReadCertFile": "Failed to read certificate file: {error}",
+    "failedToReadKeyFile": "Failed to read key file: {error}",
+    "failedToReadChainFile": "Failed to read chain file: {error}"
   },
   "confirm": {
     "discardChanges": "Are you sure you want to discard all changes?",
     "deleteSite": "Are you sure you want to delete {name}? This action cannot be undone.",
-    "unsavedChanges": "You have unsaved changes. Are you sure you want to switch sites? Your changes will be lost."
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to switch sites? Your changes will be lost.",
+    "deleteCertificate": "Are you sure you want to delete certificate \"{name}\"?"
   },
   "label": {
     "allowIP": "Allow IP",
@@ -88,7 +123,17 @@
     "gzipMinLength": "Gzip Minimum Length",
     "clientMaxBodySize": "Client Max Body Size",
     "keepaliveTimeout": "Keepalive Timeout",
-    "sendfile": "Sendfile"
+    "sendfile": "Sendfile",
+    "siteName": "Site Name",
+    "initialConfiguration": "Initial Configuration",
+    "enableSite": "Enable Site",
+    "email": "Email (optional)",
+    "domains": "Domains",
+    "certificateName": "Certificate Name",
+    "certificatePem": "Certificate (PEM)",
+    "privateKeyPem": "Private Key (PEM)",
+    "certificateChain": "Certificate Chain (PEM, optional)",
+    "selectCertificate": "Select Certificate"
   },
   "tooltip": {
     "allowIP": "IP addresses allowed to access this server",
@@ -125,6 +170,66 @@
     "gzipMinLength": "Minimum length for gzip compression",
     "clientMaxBodySize": "Maximum allowed client request body",
     "keepaliveTimeout": "Timeout for keepalive connections",
-    "sendfile": "Enable sendfile for efficient file transfer"
+    "sendfile": "Enable sendfile for efficient file transfer",
+    "selectCertificate": "Choose from available certificates or enter paths manually"
+  },
+  "placeholder": {
+    "searchSites": "Search sites...",
+    "siteName": "example.com",
+    "serverConfig": "server",
+    "email": "adminexample.com",
+    "domain": "example.com",
+    "certificateName": "my-custom-cert",
+    "certificatePem": "-----BEGIN CERTIFICATE-----",
+    "privateKeyPem": "-----BEGIN PRIVATE KEY-----",
+    "selectCertificate": "Select a certificate"
+  },
+  "page": {
+    "home": {
+      "title": "NGINX Config Manager",
+      "subtitle": "Manage your NGINX configurations and SSL certificates with ease",
+      "siteConfigurations": "Site Configurations",
+      "siteConfigurationsDesc": "Create and manage NGINX site configs",
+      "sslCertificates": "SSL Certificates",
+      "sslCertificatesDesc": "Manage Let's Encrypt and custom certificates",
+      "liveTesting": "Live Testing",
+      "liveTestingDesc": "Test configurations before applying",
+      "getStarted": "Select a site from the sidebar to get started"
+    },
+    "settings": {
+      "subtitle": "Manage your application settings and preferences"
+    },
+    "site": {
+      "subtitle": "Configure and manage your site"
+    }
+  },
+  "siteList": {
+    "title": "Sites",
+    "createNewSite": "Create new site",
+    "noSitesFound": "No sites found"
+  },
+  "createSiteModal": {
+    "siteNameHelp": "Enter the domain name or identifier for this site",
+    "useCustomConfig": "Use custom configuration",
+    "defaultConfigDescription": "A default configuration will be created for you",
+    "enabledSitesHelp": "Enabled sites will be active immediately (saved as .conf)"
+  },
+  "certificateManager": {
+    "title": "SSL/TLS Certificates",
+    "subtitle": "Manage Let's Encrypt and custom SSL certificates",
+    "loadingCertificates": "Loading certificates...",
+    "noCertificatesFound": "No Certificates Found",
+    "noCertificatesDescription": "Get started by creating a Let's Encrypt certificate or uploading a custom one",
+    "expires": "Expires:"
+  },
+  "configEditor": {
+    "title": "Configuration Options",
+    "configurationObject": "Configuration Object"
+  },
+  "layout": {
+    "defaultUser": "Default User",
+    "administrator": "Administrator",
+    "profile": "Profile",
+    "logout": "Logout"
   }
 }

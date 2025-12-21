@@ -1,6 +1,6 @@
 <template>
   <UPage>
-    <UPageBody class="flex flex-col h-full">
+    <UPageBody class="flex flex-col h-full py-4">
       <div class="mb-6 space-y-4">
         <div class="flex items-center justify-between">
           <div class="space-y-2">
@@ -13,7 +13,7 @@
                 {{ $t('badge.unsavedChanges') }}
               </UBadge>
             </div>
-            <p class="text-muted">Configure and manage your site</p>
+            <p class="text-muted">{{ $t('page.site.subtitle') }}</p>
           </div>
         </div>
         <div class="flex gap-2">

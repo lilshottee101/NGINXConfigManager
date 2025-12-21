@@ -43,6 +43,10 @@ export const useNginxApi = () => {
     return response.sites || [];
   };
 
+  const createSite = async (siteName: string, content?: string, enabled: boolean = false) => {
+    return await sendRequest('createSite', { siteName, content, enabled });
+  };
+
   const getCertificates = async () => {
     const response = await sendRequest('getCertificates');
     return response.certificates || [];
@@ -74,6 +78,7 @@ export const useNginxApi = () => {
     updateSite,
     deleteSite,
     getSites,
+    createSite,
     getCertificates,
     createCertificate,
     renewCertificate,

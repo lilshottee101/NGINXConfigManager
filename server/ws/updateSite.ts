@@ -7,13 +7,34 @@ export const name = 'updateSite'
 
 async function testNginxConfig(configContent: string): Promise<{ valid: boolean; error?: string }> {
   const datetime = Date.now();
-  const tempFile = `/tmp/nginx-test-${datetime}.conf`;
+  const tempSiteFile = `/tmp/nginx-test-site-${datetime}.conf`;
+  const tempMainFile = `/tmp/nginx-test-main-${datetime}.conf`;
 
   try {
-    await writeFile(tempFile, configContent, 'utf8');
+    // Write the site config to test
+    await writeFile(tempSiteFile, configContent, 'utf8');
+
+    // Create a main config file that imports the site config
+    const mainConfig = `
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    sendfile on;
+    keepalive_timeout 65;
+
+    # Include the test site config
+    include ${tempSiteFile};
+}
+`;
+    await writeFile(tempMainFile, mainConfig, 'utf8');
 
     return new Promise((resolve) => {
-      const nginxTest = spawn('nginx', ['-t', '-c', tempFile]);
+      const nginxTest = spawn('nginx', ['-t', '-c', tempMainFile]);
 
       let stderr = '';
 
@@ -23,9 +44,10 @@ async function testNginxConfig(configContent: string): Promise<{ valid: boolean;
 
       nginxTest.on('close', async (code) => {
         try {
-          await rm(tempFile);
+          await rm(tempSiteFile);
+          await rm(tempMainFile);
         } catch (err) {
-          console.error('Failed to remove temp file:', err);
+          console.error('Failed to remove temp files:', err);
         }
 
         if (code === 0) {
@@ -40,9 +62,10 @@ async function testNginxConfig(configContent: string): Promise<{ valid: boolean;
 
       nginxTest.on('error', async (err) => {
         try {
-          await rm(tempFile);
+          await rm(tempSiteFile);
+          await rm(tempMainFile);
         } catch (rmErr) {
-          console.error('Failed to remove temp file:', rmErr);
+          console.error('Failed to remove temp files:', rmErr);
         }
 
         resolve({
@@ -51,7 +74,7 @@ async function testNginxConfig(configContent: string): Promise<{ valid: boolean;
         });
       });
     });
-  } catch (err) {
+  } catch (err: any) {
     return {
       valid: false,
       error: `Failed to create temp config file: ${err.message}`
