@@ -1,6 +1,8 @@
 import { listCertificates } from '../../utils/certbot.ts';
 
 export const name = 'getCertificates';
+export const requiresAuth = true;
+export const requiredRole = 'user';
 
 export default async (peer: any, message: any) => {
   const { requestId } = message;

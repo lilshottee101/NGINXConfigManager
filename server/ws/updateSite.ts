@@ -3,7 +3,9 @@ import { unlink, access, writeFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 
-export const name = 'updateSite'
+export const name = 'updateSite';
+export const requiresAuth = true;
+export const requiredRole = 'admin';
 
 async function testNginxConfig(configContent: string): Promise<{ valid: boolean; error?: string }> {
   const datetime = Date.now();

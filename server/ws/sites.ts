@@ -1,7 +1,9 @@
 import { readdir } from 'node:fs/promises';
 import fs from 'node:fs';
 
-export const name = 'getSites'
+export const name = 'getSites';
+export const requiresAuth = true;
+export const requiredRole = 'user';
 
 export default async (peer: any, message: any) => {
   const formattedSites = []

@@ -24,12 +24,12 @@ EOF
 fi
 
 # Test nginx configuration
-echo "Testing nginx configuration..."
-nginx -t
+# echo "Testing nginx configuration..."
+# nginx -t
 
 # Start nginx in the background
-echo "Starting nginx..."
-nginx
+# echo "Starting nginx..."
+# nginx
 
 # Start the Nuxt application
 echo "Starting Nuxt application..."

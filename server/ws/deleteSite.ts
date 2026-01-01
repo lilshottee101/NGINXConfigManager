@@ -1,6 +1,8 @@
 import { unlink, access } from 'node:fs/promises';
 
-export const name = 'deleteSite'
+export const name = 'deleteSite';
+export const requiresAuth = true;
+export const requiredRole = 'admin';
 
 export default async (peer: any, message: any) => {
   try {

@@ -1,6 +1,8 @@
 import { getCertificateConfig } from '../../utils/certbot.ts';
 
 export const name = 'getCertificateConfig';
+export const requiresAuth = true;
+export const requiredRole = 'user';
 
 export default async (peer: any, message: any) => {
   const { requestId } = message;

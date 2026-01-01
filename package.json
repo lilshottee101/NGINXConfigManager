@@ -11,10 +11,15 @@
     "typecheck": "nuxt typecheck",
     "docker:build": "docker build -t nginx-config-manager:latest .",
     "docker:run": "docker run -d -p 3000:3000 -p 80:80 -p 443:443 --name nginx-config-manager nginx-config-manager:latest",
+    "docker:log": "docker logs nginx-config-manager",
     "docker:stop": "docker stop nginx-config-manager && docker rm nginx-config-manager",
     "docker:publish": "docker tag nginx-config-manager:latest YOUR_REGISTRY/nginx-config-manager:latest && docker push YOUR_REGISTRY/nginx-config-manager:latest",
     "docker:compose:up": "docker-compose up -d",
-    "docker:compose:down": "docker-compose down"
+    "docker:compose:down": "docker-compose down",
+    "db:generate": "prisma generate",
+    "auth:info": "npx @better-auth/cli info",
+    "auth:generate:secret": "npx @better-auth/cli info",
+    "auth:generate:db": "npx @better-auth/cli generate"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.70",
@@ -22,9 +27,11 @@
     "@nuxt/ui": "^4.0.1",
     "@nuxtjs/i18n": "^10.2.0",
     "@pinia/nuxt": "^0.11.3",
-    "@prisma/client": "^6.18.0",
+    "@prisma/adapter-better-sqlite3": "^7.2.0",
+    "@prisma/client": "^7.2.0",
     "@vueuse/nuxt": "^14.0.0",
     "@webantic/nginx-config-parser": "^1.6.1",
+    "better-auth": "^1.4.7",
     "monaco-editor": "^0.54.0",
     "monaco-editor-nginx": "^2.0.2",
     "nuxt": "^4.1.3",
@@ -35,7 +42,7 @@
   "devDependencies": {
     "@nuxt/eslint": "^1.9.0",
     "eslint": "^9.38.0",
-    "prisma": "^6.18.0",
+    "prisma": "^7.2.0",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.1.1"
   },

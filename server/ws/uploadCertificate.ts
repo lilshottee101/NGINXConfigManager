@@ -1,6 +1,8 @@
 import { uploadCustomCertificate } from '../../utils/certbot.ts';
 
 export const name = 'uploadCertificate';
+export const requiresAuth = true;
+export const requiredRole = 'admin';
 
 export default async (peer: any, message: any) => {
   const { requestId } = message;
